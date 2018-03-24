@@ -1,6 +1,9 @@
 cmake_minimum_required (VERSION 2.6)
 project (OXYGINE_FREETYPE)
 
+find_package(Freetype REQUIRED)
+include_directories(${FREETYPE_INCLUDE_DIRS})
+
 if (EMSCRIPTEN)
 	set(CMAKE_CXX_FLAGS "-Wno-warn-absolute-paths -s USE_FREETYPE=1")
 	set(OXYGINE_FREETYPE_INCLUDE_DIRS 
@@ -26,6 +29,7 @@ add_library(oxygine-freetype STATIC
 	src/ResFontFT.cpp 
 	src/ResFontFT.h
 )
+target_link_libraries(oxygine-freetype ${FREETYPE_LIBRARIES})
 
 #target_link_libraries(oxyginemagicparticles)
 
